@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DR9+qN0fTI/okmc4JcBxEIKf6cBvD35MgnT5LIt9VCCtTtDtotKU9rO/zYVV6Q+cbuotBjmzbCLHNcZjdzqaMQ==",
+  "dgSpecHash": "vYNFD6Ve1PtEFeBboZ7Q0uKaVpq98+Q1Gth/c9d1X3p2u32O9Nz1C7pl/9Ay5X0XjXWYup7j+IZLM9m2Aoy0IA==",
   "success": true,
-  "projectFilePath": "E:\\DoAn_TTCK\\CuaHangBanLapTop\\CuaHangBanLapTop\\CuaHangBanLapTop.csproj",
+  "projectFilePath": "E:\\DO_AN_TTCK\\TTCK\\CuaHangBanLapTop\\CuaHangBanLapTop\\CuaHangBanLapTop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\aspnetcorehero.toastnotification\\1.1.0\\aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

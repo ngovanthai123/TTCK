@@ -7693,11 +7693,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\DoAn_TTCK\\CuaHangBanLapTop\\CuaHangBanLapTop\\CuaHangBanLapTop.csproj",
+      "projectUniqueName": "E:\\DO_AN_TTCK\\TTCK\\CuaHangBanLapTop\\CuaHangBanLapTop\\CuaHangBanLapTop.csproj",
       "projectName": "CuaHangBanLapTop",
-      "projectPath": "E:\\DoAn_TTCK\\CuaHangBanLapTop\\CuaHangBanLapTop\\CuaHangBanLapTop.csproj",
+      "projectPath": "E:\\DO_AN_TTCK\\TTCK\\CuaHangBanLapTop\\CuaHangBanLapTop\\CuaHangBanLapTop.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "E:\\DoAn_TTCK\\CuaHangBanLapTop\\CuaHangBanLapTop\\obj\\",
+      "outputPath": "E:\\DO_AN_TTCK\\TTCK\\CuaHangBanLapTop\\CuaHangBanLapTop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
