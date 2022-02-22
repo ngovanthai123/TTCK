@@ -60,7 +60,7 @@ namespace CuaHangBanLapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdsanPam,IdphuKien,GiaKhuyenMai,NgayBatDauKhuenMai,NgayKetThucKhuyenMai")] Khuyenmai khuyenmai)
+        public async Task<IActionResult> Create([Bind("Id,IdsanPam,IdphuKien,GiaBan,GiaKhuyenMai,NgayBatDauKhuenMai,NgayKetThucKhuyenMai")] Khuyenmai khuyenmai)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace CuaHangBanLapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdsanPam,IdphuKien,GiaKhuyenMai,NgayBatDauKhuenMai,NgayKetThucKhuyenMai")] Khuyenmai khuyenmai)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdsanPam,IdphuKien,GiaBan,GiaKhuyenMai,NgayBatDauKhuenMai,NgayKetThucKhuyenMai")] Khuyenmai khuyenmai)
         {
             if (id != khuyenmai.Id)
             {

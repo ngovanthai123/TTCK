@@ -31,6 +31,9 @@ namespace CuaHangBanLapTop.Models
         [Required]
         [StringLength(255)]
         public string MatKhau { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string XacNhanMatKhau { get; set; }
 
         [InverseProperty(nameof(Hoadon.IdkhachHangNavigation))]
         public virtual ICollection<Hoadon> Hoadons { get; set; }

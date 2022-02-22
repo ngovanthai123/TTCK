@@ -18,6 +18,7 @@ namespace CuaHangBanLapTop.Models
         public int? IdsanPam { get; set; }
         [Column("IDPhuKien")]
         public int? IdphuKien { get; set; }
+        public int? GiaBan { get; set; }
         public int? GiaKhuyenMai { get; set; }
         [Column(TypeName = "date")]
         public DateTime? NgayBatDauKhuenMai { get; set; }

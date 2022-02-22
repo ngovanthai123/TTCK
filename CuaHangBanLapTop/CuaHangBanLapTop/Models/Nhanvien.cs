@@ -33,6 +33,9 @@ namespace CuaHangBanLapTop.Models
         [Required]
         [StringLength(255)]
         public string MatKhau { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string XacNhanMatKhau { get; set; }
         public int Quyen { get; set; }
 
         [InverseProperty(nameof(Hoadon.IdnhanVienNavigation))]
