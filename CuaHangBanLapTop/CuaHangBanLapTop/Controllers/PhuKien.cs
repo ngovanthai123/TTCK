@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace CuaHangBanLapTop.Controllers
 {
-    public class SanPham : Controller
+    public class PhuKien : Controller
     {
-        private readonly ILogger<SanPham> _logger;
+        private readonly ILogger<PhuKien> _logger;
 
-        public SanPham(ILogger<SanPham> logger)
+        public PhuKien(ILogger<PhuKien> logger)
         {
             _logger = logger;
         }

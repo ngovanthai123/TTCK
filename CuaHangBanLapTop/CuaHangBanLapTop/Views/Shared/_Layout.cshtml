@@ -43,13 +43,13 @@
         <div id="top-header">
             <div class="container">
                 <ul class="header-links pull-left">
-                    <li><a href="#"><i class="fa fa-phone"></i> 0919.348.968</a></li>
-                    <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                    <li><a href="https://www.google.com/maps/contrib/114749658482643527028/place/ChIJpynKyMFyCjER9NM5-liXBjY/10.3949111,105.4296278,17.81z/data=!4m6!1m5!8m4!1e2!2s114749658482643527028!3m1!1e1"><i class="fa fa-map-marker"></i> Quản Cơ Thành, p. Bình Khánh, Thành phố Long Xuyên, An Giang, Việt Nam</a></li>
+                    <li ><a href="#"style="color:black; font-weight:bold;font-size:15px"><i class="fa fa-phone"></i> 0919.348.968</a></li>
+                    <li><a href="#"style="color: black; font-weight: bold; font-size: 15px"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
+                    <li><a href="https://www.google.com/maps/contrib/114749658482643527028/place/ChIJpynKyMFyCjER9NM5-liXBjY/10.3949111,105.4296278,17.81z/data=!4m6!1m5!8m4!1e2!2s114749658482643527028!3m1!1e1"style="color: black; font-weight: bold; font-size: 15px"><i class="fa fa-map-marker"></i> Quản Cơ Thành, p. Bình Khánh, Thành phố Long Xuyên, An Giang, Việt Nam</a></li>
                 </ul>
                 <ul class="header-links pull-right">
-                    <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                    <li><a href="#"style="color: black; font-weight: bold; font-size: 15px"><i class="fa fa-dollar"></i> USD</a></li>
+                    <li><a href="#"style="color: black; font-weight: bold; font-size: 15px"><i class="fa fa-user-o"></i> My Account</a></li>
                 </ul>
             </div>
         </div>
@@ -64,7 +64,7 @@
                     <div class="col-md-3">
                         <div class="header-logo"style="margin-top: -14px;">
                             <a asp-controller="Home" asp-action="Index" class="logo">
-                                <img src="~/as/img/logo.png" style="width: 235px; margin-bottom: -50px;" alt="">
+                                <img src="~/as/img/logo.png" style="width: 430px; margin-bottom: -62px;" alt="">
                             </a>
                         </div>
                     </div>
@@ -89,16 +89,16 @@
                         <div class="header-ctn">
                             <!-- Wishlist -->
                             <div>
-                                <a href="#">
+                                <a href="#"style="color:black;font-weight:bold">
                                     <i class="fa fa-heart-o"></i>
-                                    <span>Your Wishlist</span>
+                                    <span >Your Wishlist</span>
                                     <div class="qty">2</div>
                                 </a>
                             </div>
                             <!-- /Wishlist -->
                             <!-- Cart -->
                             <div class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"style="color:black; font-weight:bold">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Your Cart</span>
                                     <div class="qty">3</div>
@@ -107,7 +107,7 @@
                                     <div class="cart-list">
                                         <div class="product-widget">
                                             <div class="product-img">
-                                                <img src="./img/product01.png" alt="">
+                                                <img src="~/as/img/product01.png" alt="">
                                             </div>
                                             <div class="product-body">
                                                 <h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -164,13 +164,12 @@
             <!-- responsive-nav -->
             <div id="responsive-nav">
                 <!-- NAV -->
-                <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="#">Trang chủ</a></li>
-                    <li><a href="#">Ưu đãi lớn</a></li>
-                    <li><a href="#">Về chúng tôi</a></li>
-                    <li><a asp-controller="SanPham" asp-action="Index">Laptop</a></li>
-                    <li><a href="#">Phụ kiện</a></li>
-                    
+                <ul class="main-nav nav navbar-nav" >
+                    <li ><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                    <li ><a asp-controller="SanPham" asp-action="Index">Laptop</a></li>
+                    <li><a asp-controller="PhuKien" asp-action="Index">Phụ kiện</a></li>
+                    <li><a asp-controller="UuDai"asp-action="Index">Ưu đãi lớn</a></li>
+                    <li><a asp-controller="About" asp-action="Index">Về chúng tôi</a></li>
                 </ul>
                 <!-- /NAV -->
             </div>
