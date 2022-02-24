@@ -22,7 +22,7 @@ namespace CuaHangBanLapTop.Models
         [Required]
         [StringLength(255)]
         public string HoVaTen { get; set; }
-        public int SoDienThoai { get; set; }
+        public string SoDienThoai { get; set; }
         [StringLength(255)]
         public string Email { get; set; }
         [StringLength(255)]

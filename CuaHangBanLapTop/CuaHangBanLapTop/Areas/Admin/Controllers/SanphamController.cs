@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CuaHangBanLapTop.Data;
 using CuaHangBanLapTop.Models;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace CuaHangBanLapTop.Controllers
 {
@@ -51,7 +53,7 @@ namespace CuaHangBanLapTop.Controllers
         public IActionResult Create()
         {
             ViewData["IddongSanPham"] = new SelectList(_context.Dongsanphams, "Id", "TenSanPham");
-            ViewData["IdnoiSanXuat"] = new SelectList(_context.Noisanxuats, "Id", "Id");
+            ViewData["IdnoiSanXuat"] = new SelectList(_context.Noisanxuats, "Id", "TenNoiSanXuat");
             return View();
         }
 
@@ -60,16 +62,17 @@ namespace CuaHangBanLapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdnoiSanXuat,IddongSanPham,TenSanPham,AnhSanPham,GiaSanPham,SoLuong,MoTa,BaoHanh")] Sanpham sanpham)
+        public async Task<IActionResult> Create(IFormFile file, [Bind("Id,IdnoiSanXuat,IddongSanPham,TenSanPham,AnhSanPham,GiaSanPham,SoLuong,MoTa,BaoHanh")] Sanpham sanpham)
         {
             if (ModelState.IsValid)
             {
+                sanpham.AnhSanPham = Upload(file);
                 _context.Add(sanpham);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IddongSanPham"] = new SelectList(_context.Dongsanphams, "Id", "TenSanPham", sanpham.IddongSanPham);
-            ViewData["IdnoiSanXuat"] = new SelectList(_context.Noisanxuats, "Id", "Id", sanpham.IdnoiSanXuat);
+            ViewData["IdnoiSanXuat"] = new SelectList(_context.Noisanxuats, "Id", "TenNoiSanXuat", sanpham.IdnoiSanXuat);
             return View(sanpham);
         }
 
@@ -87,7 +90,7 @@ namespace CuaHangBanLapTop.Controllers
                 return NotFound();
             }
             ViewData["IddongSanPham"] = new SelectList(_context.Dongsanphams, "Id", "TenSanPham", sanpham.IddongSanPham);
-            ViewData["IdnoiSanXuat"] = new SelectList(_context.Noisanxuats, "Id", "Id", sanpham.IdnoiSanXuat);
+            ViewData["IdnoiSanXuat"] = new SelectList(_context.Noisanxuats, "Id", "TenNoiSanXuat", sanpham.IdnoiSanXuat);
             return View(sanpham);
         }
 
@@ -96,7 +99,7 @@ namespace CuaHangBanLapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdnoiSanXuat,IddongSanPham,TenSanPham,AnhSanPham,GiaSanPham,SoLuong,MoTa,BaoHanh")] Sanpham sanpham)
+        public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("Id,IdnoiSanXuat,IddongSanPham,TenSanPham,AnhSanPham,GiaSanPham,SoLuong,MoTa,BaoHanh")] Sanpham sanpham)
         {
             if (id != sanpham.Id)
             {
@@ -107,6 +110,7 @@ namespace CuaHangBanLapTop.Controllers
             {
                 try
                 {
+                    sanpham.AnhSanPham = Upload(file);
                     _context.Update(sanpham);
                     await _context.SaveChangesAsync();
                 }
@@ -124,7 +128,7 @@ namespace CuaHangBanLapTop.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IddongSanPham"] = new SelectList(_context.Dongsanphams, "Id", "TenSanPham", sanpham.IddongSanPham);
-            ViewData["IdnoiSanXuat"] = new SelectList(_context.Noisanxuats, "Id", "Id", sanpham.IdnoiSanXuat);
+            ViewData["IdnoiSanXuat"] = new SelectList(_context.Noisanxuats, "Id", "TenNoiSanXuat", sanpham.IdnoiSanXuat);
             return View(sanpham);
         }
 
@@ -162,6 +166,23 @@ namespace CuaHangBanLapTop.Controllers
         private bool SanphamExists(int id)
         {
             return _context.Sanphams.Any(e => e.Id == id);
+        }
+
+        //Load ảnh sản phẩm
+        public string Upload(IFormFile file)
+        {
+            string UploadFileName = null;
+            if (file != null)
+            {
+                UploadFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                var path = $"wwwroot\\images\\{ UploadFileName}";
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+            }
+            return UploadFileName;
         }
     }
 }
