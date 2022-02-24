@@ -1,5 +1,8 @@
 using AspNetCoreHero.ToastNotification;
 using CuaHangBanLapTop.Data;
+using CuaHangBanLapTop.Services;
+using CuaHangBanLapTop.servie;
+using CuaHangBanLapTop.Servie;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,7 +32,8 @@ namespace CuaHangBanLapTop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddScoped<IProduct, ItemProductService>();
+            services.AddScoped<IProduct, ItemProductService>();
+            services.AddScoped<iproduct, Itemproductservice>();
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages();

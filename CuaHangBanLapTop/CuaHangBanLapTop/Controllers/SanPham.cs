@@ -1,5 +1,8 @@
-﻿using CuaHangBanLapTop.Models;
+﻿using CuaHangBanLapTop.Data;
+using CuaHangBanLapTop.Models;
+using CuaHangBanLapTop.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,27 +14,71 @@ namespace CuaHangBanLapTop.Controllers
 {
     public class SanPham : Controller
     {
-        private readonly ILogger<SanPham> _logger;
+        private LAPTOPContext db = new LAPTOPContext();
+        private readonly LAPTOPContext _context;
+        private readonly IProduct _product;
+        public SanPham(LAPTOPContext context, IProduct product)
 
-        public SanPham(ILogger<SanPham> logger)
         {
-            _logger = logger;
+            _context = context;
+            _product = product;
+
+
+        }
+        public IActionResult Index(string timkiem, int? page = 0)
+        {
+
+            int limit = 12;
+            int start;
+            if (page > 0)
+            {
+                page = page;
+            }
+            else
+            {
+                page = 1;
+            }
+            start = (int)(page - 1) * limit;
+
+            ViewBag.pageCurrent = page;
+
+
+            int totalProduct = _product.totalProduct();
+
+            ViewBag.totalProduct = totalProduct;
+
+            ViewBag.numberPage = _product.numberPage(totalProduct, limit);
+            var dress = _context.Sanphams
+            .Skip((int)((page - 1) * limit)).Take(limit);
+
+            if (!String.IsNullOrEmpty(timkiem))
+            {
+                dress = dress.Where(s => s.TenSanPham.Contains(timkiem));
+            }
+            ViewBag.thongbao = dress.Count();
+            return View(dress);
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+
+        public async Task<IActionResult> Details(int? id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var sanpham = await _context.Sanphams
+                .Include(s => s.IdnoiSanXuatNavigation)
+                .Include(s => s.IddongSanPhamNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (sanpham == null)
+            {
+                return NotFound();
+            }
+
+            return View(sanpham);
         }
     }
 }
