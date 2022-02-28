@@ -1,0 +1,30 @@
+﻿@model List<CuaHangBanLapTop.Models.CartItem>
+
+<br />
+<h2 style="color:black; font-weight:bold; font-family:cursive; margin-bottom:10px;text-align:center">Giỏ hàng của bạn</h2>
+
+
+    <table class="table" style="width: 90%; margin-left: 85px;">
+        <tr>
+            <th>STT</th>
+            <th>Hình ảnh</th>
+            <th style="width:500px">Sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+            <th></th>
+        </tr>
+       
+        <tr>
+            <td colspan="4" class="text-end">Tổng tiền</td>
+        </tr>
+    </table>
+    <div class="text-end" style="padding-bottom: 20px; margin-left: 180px;">
+        <a class="btn btn-info" asp-action="CheckOut">Thanh toán</a>
+    </div>
+
+    <div class="text-end" style="padding-bottom: 20px; margin-left: 1300px;">
+        <a class="btn btn-info" asp-controller="SanPham" asp-action="Index" style="text-decoration:none">Mua tiếp</a>
+    </div>
+
+
