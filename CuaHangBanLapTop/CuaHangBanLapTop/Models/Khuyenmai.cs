@@ -16,6 +16,10 @@ namespace CuaHangBanLapTop.Models
         public int Id { get; set; }
         [Column("IDSanPam")]
         public int? IdsanPam { get; set; }
+        [StringLength(255)]
+        public string AnhMauSP { get; set; }
+        [StringLength(255)]
+        public string TenSP { get; set; }
         [Column("IDPhuKien")]
         public int? IdphuKien { get; set; }
         public int? GiaBan { get; set; }

@@ -10,23 +10,33 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="IdsanPam" class="control-label"></label>
-                <select asp-for="IdsanPam" class="form-control" asp-items="ViewBag.IdsanPam"></select>
-                <span asp-validation-for="IdsanPam" class="text-danger"></span>
+                @Html.LabelFor(model => model.IdsanPam)
+                @Html.DropDownList("IdsanPam", null, "-- Chọn --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdsanPam, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <label asp-for="IdphuKien" class="control-label"></label>
-                <select asp-for="IdphuKien" class="form-control" asp-items="ViewBag.IdphuKien"></select>
-                <span asp-validation-for="IdphuKien" class="text-danger"></span>
+                @Html.LabelFor(model => model.IdphuKien)
+                @Html.DropDownList("IdphuKien", null, "-- Chọn --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdphuKien, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <label asp-for="GiaBan" class="control-label"></label>
-                <input asp-for="GiaBan" class="form-control" />
-                <span asp-validation-for="GiaBan" class="text-danger"></span>
+                @Html.LabelFor(model => model.TenSP)
+                @Html.DropDownList("TenSP", null, "-- Chọn --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label asp-for="AnhMauSP" class="control-label"></label>
+                <input type="file" name="file" multiple accept="image/jpg , image/jpeg, image/png" />
+                <span asp-validation-for="AnhMauSP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.GiaBan)
+                @Html.DropDownList("GiaBan", null, "-- Chọn --", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <label asp-for="GiaKhuyenMai" class="control-label"></label>

@@ -1,4 +1,5 @@
-﻿using CuaHangBanLapTop.Models;
+﻿using CuaHangBanLapTop.Data;
+using CuaHangBanLapTop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,16 +12,21 @@ namespace CuaHangBanLapTop.Controllers
 {
     public class HomeController : Controller
     {
+        private LAPTOPContext db = new LAPTOPContext();
+        private readonly LAPTOPContext _context;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, LAPTOPContext context)
         {
+            _context = context;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var dress = _context.Khuyenmais;
+
+            return View(dress);
         }
 
         public IActionResult Privacy()

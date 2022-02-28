@@ -25,9 +25,6 @@
                 @Html.DisplayNameFor(model => model.SoLuong)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MoTa)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.BaoHanh)
             </th>
             <th>
@@ -43,16 +40,13 @@
                 @Html.DisplayFor(modelItem => item.TenPhuKien)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AnhMau)
+                <img src="~/Images/@Html.DisplayFor(modelItem=> item.AnhMau)" width="60" height="60" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Gia)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SoLuong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MoTa)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BaoHanh)

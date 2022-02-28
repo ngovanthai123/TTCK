@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CuaHangBanLapTop.Data;
 using CuaHangBanLapTop.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace CuaHangBanLapTop.Controllers
 {
@@ -58,10 +60,11 @@ namespace CuaHangBanLapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdloaiPhuKien,TenPhuKien,AnhMau,Gia,SoLuong,MoTa,BaoHanh")] Phukien phukien)
+        public async Task<IActionResult> Create(IFormFile file,[Bind("Id,IdloaiPhuKien,TenPhuKien,AnhMau,Gia,SoLuong,MoTa,BaoHanh")] Phukien phukien)
         {
             if (ModelState.IsValid)
             {
+                phukien.AnhMau = Upload(file);
                 _context.Add(phukien);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -92,7 +95,7 @@ namespace CuaHangBanLapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdloaiPhuKien,TenPhuKien,AnhMau,Gia,SoLuong,MoTa,BaoHanh")] Phukien phukien)
+        public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("Id,IdloaiPhuKien,TenPhuKien,AnhMau,Gia,SoLuong,MoTa,BaoHanh")] Phukien phukien)
         {
             if (id != phukien.Id)
             {
@@ -103,6 +106,7 @@ namespace CuaHangBanLapTop.Controllers
             {
                 try
                 {
+                    phukien.AnhMau = Upload(file);
                     _context.Update(phukien);
                     await _context.SaveChangesAsync();
                 }
@@ -156,6 +160,23 @@ namespace CuaHangBanLapTop.Controllers
         private bool PhukienExists(int id)
         {
             return _context.Phukiens.Any(e => e.Id == id);
+        }
+
+        //Load ảnh phụ kiện
+        public string Upload(IFormFile file)
+        {
+            string UploadFileName = null;
+            if (file != null)
+            {
+                UploadFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                var path = $"wwwroot\\images\\{ UploadFileName}";
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+            }
+            return UploadFileName;
         }
     }
 }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CuaHangBanLapTop.Data;
 using CuaHangBanLapTop.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace CuaHangBanLapTop.Controllers
 {
@@ -52,6 +54,9 @@ namespace CuaHangBanLapTop.Controllers
         {
             ViewData["IdphuKien"] = new SelectList(_context.Phukiens, "Id", "TenPhuKien");
             ViewData["IdsanPam"] = new SelectList(_context.Sanphams, "Id", "TenSanPham");
+            ViewData["GiaBan"] = new SelectList(_context.Sanphams, "GiaSanPham", "GiaSanPham");
+            ViewData["TenSP"] = new SelectList(_context.Sanphams, "TenSanPham", "TenSanPham");
+
             return View();
         }
 
@@ -60,16 +65,20 @@ namespace CuaHangBanLapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdsanPam,IdphuKien,GiaBan,GiaKhuyenMai,NgayBatDauKhuenMai,NgayKetThucKhuyenMai")] Khuyenmai khuyenmai)
+        public async Task<IActionResult> Create(IFormFile file, [Bind("Id,IdsanPam,IdphuKien,TenSP,AnhMauSP,GiaBan,GiaKhuyenMai,NgayBatDauKhuenMai,NgayKetThucKhuyenMai")] Khuyenmai khuyenmai)
         {
             if (ModelState.IsValid)
             {
+                khuyenmai.AnhMauSP = Upload(file);
                 _context.Add(khuyenmai);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdphuKien"] = new SelectList(_context.Phukiens, "Id", "TenPhuKien", khuyenmai.IdphuKien);
             ViewData["IdsanPam"] = new SelectList(_context.Sanphams, "Id", "TenSanPham", khuyenmai.IdsanPam);
+            ViewData["GiaBan"] = new SelectList(_context.Sanphams, "GiaSanPham", "GiaSanPham", khuyenmai.GiaBan);
+            ViewData["TenSP"] = new SelectList(_context.Sanphams, "TenSanPham", "TenSanPham", khuyenmai.TenSP);
+
             return View(khuyenmai);
         }
 
@@ -88,6 +97,9 @@ namespace CuaHangBanLapTop.Controllers
             }
             ViewData["IdphuKien"] = new SelectList(_context.Phukiens, "Id", "TenPhuKien", khuyenmai.IdphuKien);
             ViewData["IdsanPam"] = new SelectList(_context.Sanphams, "Id", "TenSanPham", khuyenmai.IdsanPam);
+            ViewData["GiaBan"] = new SelectList(_context.Sanphams, "GiaSanPham", "GiaSanPham", khuyenmai.GiaBan);
+            ViewData["TenSP"] = new SelectList(_context.Sanphams, "TenSanPham", "TenSanPham", khuyenmai.TenSP);
+
             return View(khuyenmai);
         }
 
@@ -96,7 +108,7 @@ namespace CuaHangBanLapTop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdsanPam,IdphuKien,GiaBan,GiaKhuyenMai,NgayBatDauKhuenMai,NgayKetThucKhuyenMai")] Khuyenmai khuyenmai)
+        public async Task<IActionResult> Edit(IFormFile file, int id, [Bind("Id,IdsanPam,IdphuKien,TenSP,AnhMauSP,GiaBan,GiaKhuyenMai,NgayBatDauKhuenMai,NgayKetThucKhuyenMai")] Khuyenmai khuyenmai)
         {
             if (id != khuyenmai.Id)
             {
@@ -107,6 +119,7 @@ namespace CuaHangBanLapTop.Controllers
             {
                 try
                 {
+                    khuyenmai.AnhMauSP = Upload(file);
                     _context.Update(khuyenmai);
                     await _context.SaveChangesAsync();
                 }
@@ -125,6 +138,8 @@ namespace CuaHangBanLapTop.Controllers
             }
             ViewData["IdphuKien"] = new SelectList(_context.Phukiens, "Id", "TenPhuKien", khuyenmai.IdphuKien);
             ViewData["IdsanPam"] = new SelectList(_context.Sanphams, "Id", "TenSanPham", khuyenmai.IdsanPam);
+            ViewData["GiaBan"] = new SelectList(_context.Sanphams, "GiaSanPham", "GiaSanPham", khuyenmai.GiaBan);
+            ViewData["TenSP"] = new SelectList(_context.Sanphams, "TenSanPham", "TenSanPham", khuyenmai.TenSP);
             return View(khuyenmai);
         }
 
@@ -162,6 +177,22 @@ namespace CuaHangBanLapTop.Controllers
         private bool KhuyenmaiExists(int id)
         {
             return _context.Khuyenmais.Any(e => e.Id == id);
+        }
+        //Load ảnh khuyến mãi
+        public string Upload(IFormFile file)
+        {
+            string UploadFileName = null;
+            if (file != null)
+            {
+                UploadFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                var path = $"wwwroot\\images\\{ UploadFileName}";
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+            }
+            return UploadFileName;
         }
     }
 }
